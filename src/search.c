@@ -60,7 +60,10 @@ void display_args_limit(const char *bin_exec)
 
 bool is_switch(const char *arg)
 {
-    return (strnlen(arg, STRING_LIMIT) >= 2 && arg[0] == '-' && arg[1] == '-');
+    int length = strnlen(arg, STRING_LIMIT);
+
+    return ((length >= 2 && arg[0] == '-' && arg[1] == '-')
+            || (length >= 1 && arg[0] == '-'));
 }
 
 int exec_switch(const char *switch_sub_cmd, const char *bin_exec)
@@ -76,5 +79,5 @@ int exec_switch(const char *switch_sub_cmd, const char *bin_exec)
 
 void display_wrong_switch()
 {
-    printf("Wrong switch sub-command.\n");
+    printf("Invalid switch.\n");
 }
